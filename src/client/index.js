@@ -1,5 +1,5 @@
-import {getWeatherData} from './js/app'
+import {callAllAPIs} from './js/app'
 
 import './styles/style.scss'
 
-export { getWeatherData }
+export { callAllAPIs }

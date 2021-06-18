@@ -1,10 +1,23 @@
-# Weather-Journal App Project
+Travel App Capstone Project
 
 ## Overview
-This project requires you to create an asynchronous web app that uses Web API and user data to dynamically update the UI. 
+This project uses 3 APIs (Geonames, Weatherbit and Pixaby) to provide users with details about any city on a desired date. 
 
 ## Instructions
-This will require modifying the `server.js` file and the `website/app.js` file. You can see `index.html` for element references, and once you are finished with the project steps, you can use `style.css` to style your application to customized perfection.
+To build the production server, run npm build-prod
+To start the express server, run npm start 
+To start the development server, run npm run build-dev
+To run tests, run npm run test
 
 ## Extras
-If you are interested in testing your code as you go, you can use `tests.js` as a template for writing and running some basic tests for your code.
+For the special assignment, I used localStorage to allow users to save their data and come back to it on reload. Doing this also had the added benefit of acting as my member-value pair object. :)
+
+# Notes
+For this project, I used:
+    1. NodeJS & Express
+    2. Webpack & SASS
+    3. Service Workers
+    4. Various APIs
+
+
+Created By: Nehemie Etienne
