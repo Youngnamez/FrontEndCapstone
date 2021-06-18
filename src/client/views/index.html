@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Travel App</title>
+        <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id = "app">
+            <div class ="holder image">
+                <div class = "title">City Scape</div>
+                <div class = 'imgHolder'>
+                    <img id = 'cityView'></img>
+                </div>
+                <div id = 'weatherInfo'></div>
+
+                <div class ="holder save">
+                    <label for="feelings">Save Requested Report Here</label>
+                    
+                    <button id="save" type = "submit"> Save </button>
+                </div>
+            </div>
+            <div class = "infoContainer">
+                <div class ="holder headline">
+                    Travel App
+                </div>
+                <div id ="countdown">
+                    <h1 id = 'countdownNum'>0</h1>
+                   <p id= 'countdownText'>Days until Trip</p>
+               </div>
+                <div class ="holder city">
+                    <label for="city">Enter City Name here</label>
+                    <input type="text" id="city" placeholder="Enter City Here">
+                </div>
+                <div class ="holder date">
+                <label for="date">Select your desired travel date</label>
+                <input type="date" id="date" placeholder="Select the Date">
+                </div>
+
+               
+
+                <div class ="holder feel">
+                    <label for="feelings">Run Requested Report Here</label>
+
+                    <button id="generate" type = "submit"> Generate </button>
+                </div>
+            
+
+                
+            </div>
+        </div>
+    <script src="app.js" type="text/javascript"></script>
+    <!-- <script>
+      // Check that service workers are supported
+      if ('serviceWorker' in navigator) {
+          // Use the window load event to keep the page load performant
+          window.addEventListener('load', () => {
+              navigator.serviceWorker.register('/service-worker.js');
+          });
+      }
+    </script> -->
+    </body>
+</html>
