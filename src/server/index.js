@@ -1,4 +1,6 @@
 // Setup empty JS object to act as endpoint for all routes
+let weatherData = {}
+
 // Require Express to run server and routes
 const express = require("express")
 const bodyParser = require("body-parser")
@@ -25,3 +27,26 @@ app.listen(8081, function() {
     console.log("server running on port 8081");
 });
 
+app.get('/getWeatherData', function(req, res) {
+    console.log('server get request received. Sending weather data as')
+    console.log(weatherData)
+    res.send(weatherData);
+});
+
+app.post('/postWeatherData', function(req, res) {
+    console.log("Server weather data is")
+    console.log(req.body)
+
+    weatherData = {
+        weatherDescription: req.body.weatherDescription,
+        temperature: req.body.temperature,
+        windSpeed: req.body.windSpeed,
+        windDirection: req.body.windDirection,
+        cloudCoverage: req.body.cloudCoverage,
+        date: req.body.date
+    }
+    console.log('weatherData is now ')
+    console.log(weatherData)
+})
+
+module.exports = app

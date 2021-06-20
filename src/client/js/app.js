@@ -29,49 +29,31 @@ function getPreviousInfo () {
     }
     
     document.getElementById('cityView').src = localStorage.getItem("imageLink") ? localStorage.getItem("imageLink") : '';
-    
     localStorage.getItem("weatherInfo") ? updateWeatherUI(JSON.parse(localStorage.getItem("weatherInfo"))) : null;
 }
 
-function populateWeatherInfo(data) {
-    console.log('populating ui weather info with')
-    console.log(data)
+function updateWeatherUI(weatherData) {
     document.getElementById('weatherInfo').innerHTML = 
-    `<p>The expected temperature is ${data.temperature}.</p>
-    <p>You can expect a windspeed of ${data.windSpeed}mph going at an angle of ${data.windDirection}°.</p>
-    <p>Clouds will cover ${data.cloudCoverage}% of the sky that day! :)</p>`
-
-
+    `<p>⦾ The expected temperature is ${weatherData.temperature}.</p>
+    <p>⦾ You can expect a windspeed of ${weatherData.windSpeed}mph going at an angle of ${weatherData.windDirection}°.</p>
+    <p>⦾ Clouds will cover ${weatherData.cloudCoverage}% of the sky that day! :)</p>`
 }
 
-function updateUI(data) {
-    console.log("In updateUI, data is")
-    console.log(data)
-    document.getElementById('city').value = data.cityName;
-    document.getElementById('date').value = data.departureDate.replaceAll('/','-');
+async function getWeatherInformation(path) {
+    console.log("Getting weatherData from server")
+    const response = await fetch(path);
+    //some work to update the UI
+    try {
+        const apiData = await response.json();
+        console.log("server weatherData is")
+        console.log(apiData)
+       return apiData;
+      }catch(error) {
+      console.log("error", error);
+      // appropriately handle the error
+      }
 }
 
-function updateWeatherUI(data) {
-    document.getElementById('weatherInfo').innerHTML = 
-    `<p>⦾ The expected temperature is ${data.temperature}.</p>
-    <p>⦾ You can expect a windspeed of ${data.windSpeed}mph going at an angle of ${data.windDirection}°.</p>
-    <p>⦾ Clouds will cover ${data.cloudCoverage}% of the sky that day! :)</p>`
-}
-
-async function saveTrip(path, data) {
-    console.log("Saving trip Data: ")
-    console.log(data);
-    const response = await fetch(path, {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:8081/',
-    },
-    mode: 'cors',
-    credentials: 'same-origin', 
-    body: JSON.stringify(data),
-   });
-}
 async function callAllAPIs() {
     const cityName = document.getElementById('city').value;
     localStorage.setItem('city', cityName);
@@ -83,11 +65,16 @@ async function callAllAPIs() {
         })
     })
     
+    .then(getPixabyImage(cityName))
     .then(function() {
-        getPixabyImage(cityName);     
+        console.log('got pixaby')
+        getWeatherInformation('http://localhost:8081/getWeatherData')
+        .then(function(weatherData) {
+            updateWeatherUI(weatherData)
+        })
     })
+ 
 }
-
 
 
 /* API Calls */
@@ -136,7 +123,7 @@ async function getWeatherBitData (data) {
         console.log(localStorage)
         console.log("local storage weatherInfo is")
         console.log(localStorage.getItem('weatherInfo'))
-        updateWeatherUI(data);
+        postWeatherData(data);
         return data;
     }
     catch (error) {
@@ -151,15 +138,33 @@ async function getPixabyImage(cityName) {
     try {
         const apiData = await response.json();
         console.log("web data")
-        console.log(apiData)
-        document.getElementById('cityView').src = apiData.hits[0].largeImageURL;
-        localStorage.setItem("imageLink", apiData.hits[0].largeImageURL);
+        console.log(apiData);
+        console.log("inside pixaby")
+        const imageLink = apiData.hits[0].largeImageURL;
+        document.getElementById('cityView').src = imageLink;
+        localStorage.setItem("imageLink", imageLink);
+       return imageLink;
       }catch(error) {
       console.log("error", error);
       // appropriately handle the error
       }
 }
 
+async function postWeatherData(weatherData) {
+    console.log('weatherData')
+    const response = await fetch("http://localhost:8081/postWeatherData", {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:8000/',
+        },
+        mode: 'cors',
+        credentials: 'same-origin', 
+        body: JSON.stringify(weatherData),
+       });
+
+
+}
 
 /* Helper Functions */
 function getGeoNameAPIUrl(city) {
