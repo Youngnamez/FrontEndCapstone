@@ -16,12 +16,8 @@
                 <div id = 'weatherInfo'></div>
 
                 <div class ="saveContainer">
-                    <label for="save">Save Requested Report Here</label>
-                    
-                    <div class = 'buttonHolder'>
-                        <button id="save" type = "submit"> Save </button>
-                    </div>
-                    
+                    <label for="save">Refresh the Page to see your Data Saved!</label>
+                   
                 </div>
             </div>
             <div class = "infoContainer">
@@ -47,12 +43,12 @@
         </div>
     <script>
       // Check that service workers are supported
-      if ('serviceWorker' in navigator) {
-          // Use the window load event to keep the page load performant
-          window.addEventListener('load', () => {
-              navigator.serviceWorker.register('/service-worker.js');
-          });
-      }
+    //   if ('serviceWorker' in navigator) {
+    //       // Use the window load event to keep the page load performant
+    //       window.addEventListener('load', () => {
+    //           navigator.serviceWorker.register('/service-worker.js');
+    //       });
+    //   }
     </script>
     </body>
 </html>

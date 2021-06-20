@@ -3,7 +3,6 @@ import {updateCountdown} from '../js/updateCountdown'
 /* Global Variables */
 console.log("Beginning")
 let daysUntilTrip = 0;
-let currentDate = new Date();
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -81,9 +80,6 @@ async function callAllAPIs() {
     .then(function(cityData) {
         getWeatherBitData(cityData)
         .then(function(weatherData) {
-            // console.log('populating weather with')
-            // console.log(weatherData) //is undefined currently
-            // populateWeatherInfo(weatherData)
         })
     })
     
