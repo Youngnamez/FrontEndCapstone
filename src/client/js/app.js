@@ -1,3 +1,4 @@
+import e from 'express';
 import {updateCountdown} from '../js/updateCountdown'
 
 /* Global Variables */
@@ -10,7 +11,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     /* Event Listeners */
     document.getElementById("generate").addEventListener('click', function() {
         // leaving zip code as const variable for now
-        callAllAPIs()
+        if (document.getElementById('date').value == '' || document.getElementById('city').value == '') {
+            alert('All fields must be filled in order to generate.')
+            return;
+        }
+        else {
+            callAllAPIs()
+        }
     });
 
     document.getElementById("date").addEventListener('change', function() {
