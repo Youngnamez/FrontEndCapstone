@@ -1,6 +1,7 @@
 const path = require("path")
 const webpack = require("webpack")
 module.exports = {
+    target: 'node',
     entry: './src/client/index.js',
     output: {
         libraryTarget: 'var',

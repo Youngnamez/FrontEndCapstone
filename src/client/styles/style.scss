@@ -58,7 +58,6 @@ body{
     height:20vh;
     font-size: 6vw;
     text-align: center;
-    border:2px solid blue;
 }
 
 .cityScape {
@@ -206,7 +205,6 @@ input:hover {
     .imgHolder {
         grid-area:img;
         border:solid;
-        border: 1px solid red;
         justify-content:center;
         align-items: center;
         max-height: 30vh;

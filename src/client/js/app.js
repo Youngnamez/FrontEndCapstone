@@ -1,8 +1,6 @@
-import e from 'express';
 import {updateCountdown} from '../js/updateCountdown'
 
 /* Global Variables */
-console.log("Beginning")
 let daysUntilTrip = 0;
 
 
